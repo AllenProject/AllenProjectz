@@ -3,10 +3,9 @@
 #define led1 7
 #define led2 6
 #define led3 5
-#define buzzer 0
+#define buzzer 3
 
 int sound = 250;
-
 
 void setup() {
   Serial.begin (9600);
@@ -32,29 +31,29 @@ void loop() {
 
   if (distance <= 25) {
     digitalWrite(led1, HIGH);
-    sound = 250;
 }
   else {
     digitalWrite(led1,LOW);
   }
 
   if (distance < 15) {
-      digitalWrite(led2, HIGH);
-      sound = 260;
-
       digitalWrite(led1, HIGH);
-      sound = 260;
+      digitalWrite(led2, HIGH);
 }
   else {
-      digitalWrite(led2, LOW);
       digitalWrite(led1, LOW);
+      digitalWrite(led2, LOW);
   }
-
-  if (distance < 5) {
+  
+  if (distance < 10) {
+      digitalWrite(led1, HIGH);
+      digitalWrite(led2, HIGH);
       digitalWrite(led3, HIGH);
       sound = 270;
 } 
   else {
+    digitalWrite(led1, LOW);
+    digitalWrite(led2, LOW);
     digitalWrite(led3, LOW);
   }
 
@@ -62,11 +61,12 @@ void loop() {
     Serial.println("Out of range");
     noTone(buzzer);
   }
+  
   else {
     Serial.print(distance);
     Serial.println(" cm");
     tone(buzzer, sound);
-
   }
+  
   delay(500);
 }
