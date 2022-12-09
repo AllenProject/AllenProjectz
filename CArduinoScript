@@ -5,7 +5,7 @@
 #define led3 5
 #define buzzer 3
 
-int sound = 250;
+int sound = 0;
 
 void setup() {
   Serial.begin (9600);
